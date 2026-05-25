@@ -1,0 +1,33 @@
+{
+  "connector.class": "io.debezium.connector.postgresql.PostgresConnector",
+
+  "database.hostname": "postgres",
+  "database.port": "5432",
+  "database.user": "cdc_reader",
+  "database.password": "cdc_reader_pwd",
+  "database.dbname": "retail",
+
+  "topic.prefix": "cdc",
+
+  "plugin.name": "pgoutput",
+  "slot.name": "cdc_retail_slot",
+  "publication.name": "cdc_publication",
+  "publication.autocreate.mode": "disabled",
+
+  "table.include.list": "public.customers,public.products,public.orders,public.order_items,public.payments,public.returns",
+
+  "snapshot.mode": "initial",
+
+  "schema.history.internal.kafka.bootstrap.servers": "kafka:9092",
+  "schema.history.internal.kafka.topic": "schema-history.retail",
+
+  "decimal.handling.mode": "double",
+  "time.precision.mode": "connect",
+  "tombstones.on.delete": "false",
+  "heartbeat.interval.ms": "10000",
+
+  "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "key.converter.schemas.enable": "true",
+  "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+  "value.converter.schemas.enable": "true"
+}
